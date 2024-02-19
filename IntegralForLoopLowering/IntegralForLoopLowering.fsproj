@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="IntegralForLoopLowering.New">
+      <HintPath>..\IntegralForLoopLowering.New\bin\Release\net8.0\IntegralForLoopLowering.New.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="IntegralForLoopLowering.Old">
+      <HintPath>..\IntegralForLoopLowering.Old\bin\Release\net8.0\IntegralForLoopLowering.Old.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
