@@ -1,6 +1,25 @@
-﻿module IntegralForLoopLowering.New
+module IntegralForLoopLowering.New
 
 open System.Runtime.CompilerServices
+
+module Int32 =
+    [<MethodImpl(MethodImplOptions.NoInlining)>]
+    let ``10..1`` () = for _ in 10..1 do ignore (2. ** 2.)
+
+    [<MethodImpl(MethodImplOptions.NoInlining)>]
+    let ``1..256`` () = for _ in 1..256 do ignore (2. ** 2.)
+
+    [<MethodImpl(MethodImplOptions.NoInlining)>]
+    let ``start..finish`` (start : int) finish = for _ in start..finish do ignore (2. ** 2.)
+
+    [<MethodImpl(MethodImplOptions.NoInlining)>]
+    let ``10..2..1`` () = for _ in 10..2..1 do ignore (2. ** 2.)
+
+    [<MethodImpl(MethodImplOptions.NoInlining)>]
+    let ``1..2..256`` () = for _ in 1..2..256 do ignore (2. ** 2.)
+
+    [<MethodImpl(MethodImplOptions.NoInlining)>]
+    let ``start..step..finish`` (start : int) step finish = for _ in start..step..finish do ignore (2. ** 2.)
 
 module UInt32 =
     [<MethodImpl(MethodImplOptions.NoInlining)>]

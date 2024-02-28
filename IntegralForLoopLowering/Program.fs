@@ -1,11 +1,41 @@
-﻿module IntegralForLoopLowering.Benchmarks
+module IntegralForLoopLowering.Benchmarks
 
 open BenchmarkDotNet.Attributes
 open BenchmarkDotNet.Configs
 open BenchmarkDotNet.Running
 
-[<MemoryDiagnoser; GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory); CategoriesColumn; HideColumns("Method")>]
+[<MemoryDiagnoser; GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory); CategoriesColumn; HideColumns("Method", "Error", "StdDev", "RatioSD")>]
 type Benchmarks () =
+    [<Benchmark(Baseline = true); BenchmarkCategory("Int32", "1", "10..1")>]
+    member _.Int32_Old_10_1 () = Old.Int32.``10..1`` ()
+
+    [<Benchmark; BenchmarkCategory("Int32", "1", "10..1")>]
+    member _.Int32_New_10_1 () = New.Int32.``10..1`` ()
+
+    [<Benchmark(Baseline = true); BenchmarkCategory("Int32", "2", "1..256")>]
+    member _.Int32_Old_1_256 () = Old.Int32.``1..256`` ()
+
+    [<Benchmark; BenchmarkCategory("Int32", "2", "1..256")>]
+    member _.Int32_New_1_256 () = New.Int32.``1..256`` ()
+
+    [<Benchmark(Baseline = true); BenchmarkCategory("Int32", "3", "start..finish (start=1,finish=65536)")>]
+    member this.Int32_Old_Dynamic_1_65536 () = Old.Int32.``start..finish`` 1 65536
+
+    [<Benchmark; BenchmarkCategory("Int32", "3", "start..finish (start=1,finish=65536)")>]
+    member this.Int32_New_Dynamic_1_65536 () = New.Int32.``start..finish`` 1 65536
+
+    [<Benchmark(Baseline = true); BenchmarkCategory("Int32", "4", "1..2..256")>]
+    member _.Int32_Old_1_2_256 () = Old.Int32.``1..2..256`` ()
+
+    [<Benchmark; BenchmarkCategory("Int32", "4", "1..2..256")>]
+    member _.Int32_New_1_2_256 () = New.Int32.``1..2..256`` ()
+
+    [<Benchmark(Baseline = true); BenchmarkCategory("Int32", "5", "start..step..finish (start=1,step=2,finish=65536)")>]
+    member this.Int32_Old_Dynamic_1_2_65536 () = Old.Int32.``start..step..finish`` 1 2 65536
+
+    [<Benchmark; BenchmarkCategory("Int32", "5", "start..step..finish (start=1,step=2,finish=65536)")>]
+    member this.Int32_New_Dynamic_1_2_65536 () = New.Int32.``start..step..finish`` 1 2 65536
+
     [<Benchmark(Baseline = true); BenchmarkCategory("UInt32", "1", "10u..1u")>]
     member _.UInt32_Old_10uTo1u () = Old.UInt32.``10u..1u`` ()
 
